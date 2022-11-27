@@ -38,7 +38,9 @@ const Post = props => {
 					// setLocationModal(true);
 					setCurrentImage(`http://localhost:8080/api/images/${props.savedLocations._id}`);
 				}}>{props.savedLocations.name}</button>
-			<div id='displayAddress'> {props.savedLocations.street_address}, {props.savedLocations.state}</div>
+			<div id='displayAddress'> {props.savedLocations.street_address}
+			<br />
+			{props.savedLocations.city}, {props.savedLocations.state}</div>
 			<div className="text-sm" id='displayCaption'>{props.savedLocations.caption}</div>
 			{/* currently just displaying the picture down here on click, we were thinking a modal? idk */}
 			{currentImage !== '' ? <img src={currentImage} /> : null}
