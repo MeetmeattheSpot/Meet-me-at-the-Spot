@@ -9,6 +9,8 @@ const Input = (props) => {
     const userData = props.userData;
     const setAddress = props.setAddress;
     const [file, setFile] = useState(null);
+    const setTestImage = props.setTestImage;
+    
 
     // This function takes values from input fields and updates the userData piece of state,
     const handleChange = (e, property) => {
@@ -97,18 +99,18 @@ const Input = (props) => {
               }
                 setUserLocations(locations);
                 // console.log(locations);
-                console.log('the file submitted in body is', file)
+                // console.log('the file submitted in body is', file)
+                let formData = new FormData();
+                formData.append('image', file);
+                formData.append('user_id', userId);
+                formData.append('location_id', locations[locations.length - 1].id);
                 fetch('/api/images', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'image/jpeg'
-                    },
-                    body: file
+                    body: formData
                 })
                     .then((res) => res.json())
                     .then((res) => {
-                        console.log(res);
-                        console.log('successfully uploaded image')
+                        setTestImage(`api/images/${res.filename}`);
                     })
                     .then(fetch)
                     .catch(err => console.log('could not upload image'))

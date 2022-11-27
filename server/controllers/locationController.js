@@ -1,12 +1,13 @@
 //const { resourceLimits } = require('worker_threads');
 const db = require('../models/databaseModel.js');
 
+
 const locationController = {};
 
 // use google maps api to get location data
 locationController.geoCode = (req, res, next) => {
   const { street_address, city, state } = req.body;
-  fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${street_address},+${city},+${state}&key=AIzaSyDQDbjEQhw7quWxt1veIwXv3BmpVzjknr4`)
+  fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${street_address},+${city},+${state}&key=${process.env.GOOGLE_MAPS_API_KEY}`)
 
     .then((data) => data.json())
     .then((data) => {

@@ -25,6 +25,7 @@ const App = props => {
     category: '',
     public: true,
   })
+  const [testImage, setTestImage] = useState('');
 
   // UseEffect to update the saved locations after rendering. 
   // SavedLocations/[] was passedin as a second arg to prevent constant rerendering. 
@@ -57,9 +58,9 @@ const App = props => {
               <List savedLocations={savedLocations} /> 
             </div>
             <div className="col-span-2 pt-10">
-                <Map savedLocations={savedLocations} /> 
+                <Map savedLocations={savedLocations} testImage={testImage} /> 
           <div className="bg-[#D6CDA4]">
-            <div id="sidebardiv"> <Sidebar savedLocations={savedLocations} setSavedLocations={setSavedLocations} savedUser={savedUser} userData={userData} userId={userId} setAddress={setAddress} setUserLocations={setUserLocations}/> </div>
+            <div id="sidebardiv"> <Sidebar savedLocations={savedLocations} setSavedLocations={setSavedLocations} savedUser={savedUser} userData={userData} userId={userId} setAddress={setAddress} setUserLocations={setUserLocations} setTestImage={setTestImage} /> </div>
           </div>
             </div>
             <div className="col-span-1 pt-10">

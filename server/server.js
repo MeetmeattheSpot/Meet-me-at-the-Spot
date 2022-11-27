@@ -7,9 +7,13 @@ const apiRouter = require('./routes/api.js')
 const cookieParser = require('cookie-parser');
 // const fileUpload = require('express-fileupload');
 const morgan = require('morgan');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // cookie parser
 app.use(cookieParser());

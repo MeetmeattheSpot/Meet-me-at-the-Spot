@@ -21,6 +21,7 @@ const center = {
 };
 
 function MyComponent(props) {
+  const testImage = props.testImage;
 
   // This is the array of saved locations pulled from the database
   const savedLocations = props.savedLocations;
@@ -69,6 +70,7 @@ function MyComponent(props) {
                 <p>{selected.street_address}</p>
                 <p>{selected.city}, {selected.state} {selected.zip_code}</p>
                 <p>"{selected.caption}" - Somebody</p>
+                <p><img class="w-60" src={testImage} alt="test" /></p>
               </p>
             </InfoWindow>
           )
