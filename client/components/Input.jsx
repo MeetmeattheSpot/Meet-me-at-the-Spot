@@ -1,6 +1,5 @@
 import React, { Component, useState } from "react";
 
-
 const Input = (props) => {
     const userId = props.userId;
     const savedUser = props.savedUser;
@@ -9,6 +8,9 @@ const Input = (props) => {
     const setUserLocations = props.setUserLocations;
     const userData = props.userData;
     const setAddress = props.setAddress;
+    const [file, setFile] = useState(null);
+    const setTestImage = props.setTestImage;
+    
 
     // This function takes values from input fields and updates the userData piece of state,
     const handleChange = (e, property) => {
@@ -96,30 +98,36 @@ const Input = (props) => {
                 locations = [];
               }
                 setUserLocations(locations);
-                console.log(locations);
+                // console.log(locations);
+                // console.log('the file submitted in body is', file)
+                let formData = new FormData();
+                formData.append('image', file);
+                formData.append('user_id', userId);
+                formData.append('location_id', locations[locations.length - 1]._id);
+                fetch('/api/images', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then((res) => res.json())
+                    .then((res) => {
+                        // returns the image filename if you wanted to use it
+                        // setTestImage(`api/images/${res.filename}`);
+                    })
+                    .then(fetch)
+                    .catch(err => console.log('could not upload image'))
             })
             .then(()=>console.log('user locations updated'))
           }) 
         //fetch request to userlocations
         //set userlocations to whatever we get back from the server
         .catch(err => console.log('error after submit'))
+        
     }
 
-    let variable;
-    const addImage = () => {
-        const fileUploader = document.getElementById('file');
-        console.log(fileUploader)
-        fetch('/api/images', {
-            method: 'POST',
-            body: fileUploader.value
-        })
-        .then((res) => res.json())
-        .then((res) => {
-            console.log(res);
-            })
-        .then(fetch)
-        .catch(err => console.log('error after submit'))
-    }
+    // const addImage = (e) => {
+    //     console.log(e.target.files[0]);
+    //     ;
+    // }
 
     // function addImage (event) {
     //     var file = event.target.files[0];
@@ -219,7 +227,7 @@ const Input = (props) => {
                     accept="image/*"
                     name="neededimage"
                     id="file"
-                    onChange={(e) => addImage(e)} 
+                    onChange={(e) => setFile(e.target.files[0])}
                     />
                     <br />
            <button className="bg-[#FA7070] hover:bg-orange-300 text-white font-bold py-2 px-4 rounded" onClick={submitFunc}>Submit</button>

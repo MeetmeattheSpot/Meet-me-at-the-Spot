@@ -14,7 +14,7 @@ const createErr = (method) => {
 loginController.checkCredentials = (req, res, next) => {
   // get credentials from req.body and destructure them
   const { username, password: pw } = req.body;
-  console.log(pw);
+  // console.log(pw);
   // create a query
     const query = 'SELECT * FROM users WHERE username = $1;';
     // query database to see if that username exists
@@ -37,7 +37,7 @@ loginController.checkCredentials = (req, res, next) => {
             if (result) {
             // if password is correct, save user & user id to session
               const { username, _id } = dbResponse.rows[0];
-              console.log(username, _id);
+              // console.log(username, _id);
               res.locals.user = {
                 id: _id,
                 username: username

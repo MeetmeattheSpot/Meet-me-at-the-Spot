@@ -28,9 +28,6 @@ function handleSignup(){
           // if verified redirect to homepage
           console.log('signed up on front end');
           setLoginModal();
-          
-
-
         }
       })
       .catch(err => console.log('Login error: ', err));

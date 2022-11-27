@@ -15,7 +15,7 @@ router.post('/newLocation',
   captionsController.addCaption,
   locationController.getLocationsAndCaptions,
   (req, res) => {
-    console.log('made it to the router');
+    // console.log('made it to the router');
     return res.status(200).json(res.locals.bigList);
   })
 
@@ -28,7 +28,7 @@ router.post('/newLocation',
   router.get('/getList/',
   locationController.getLocationsAndCaptions,
   (req, res) => {
-    console.log('made it to the getList router');
+    // console.log('made it to the getList router');
     return res.status(200).json(res.locals.bigList);
   })
   
@@ -36,7 +36,8 @@ router.get('/getPersonalList/:user',
   locationController.getUserLocations,
   locationController.getLocationsAndCaptions,
   (req, res) => {
-    console.log('made it to the getList for User router');
+    // console.log('made it to the getList for User router');
+    console.log(res.locals.bigList);
     return res.status(200).json(res.locals.bigList);
   })
 
@@ -72,6 +73,18 @@ const imageUpload = multer({
     dest: 'images',
 });
 
+router.get('/images/:id',
+  imageController.getImageFromLocation,
+  (req, res) => {
+  res.type(res.locals.mimetype).sendFile(res.locals.fullfilepath);
+});
+
+// router.get('/images/:filename',
+//   imageController.getImage,
+//   (req, res) => {
+//   res.type(res.locals.mimetype).sendFile(res.locals.fullfilepath);
+// });
+
 router.post('/images',
   imageUpload.single('image'),
   imageController.uploadImage,
@@ -79,11 +92,9 @@ router.post('/images',
   res.json({ success: true, filename: res.locals.filename })
 );
 
-router.get('/images/:filename',
-  imageController.getImage,
-  (req, res) => {
-  res.type(res.locals.mimetype).sendFile(res.locals.fullfilepath);
-});
+
+
+
 
 
     

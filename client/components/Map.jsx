@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
+// import dotenv from 'dotenv'
+
+// initiate dotenv
+// dotenv.config();
 
 // This component imports the React Google Maps API library and implements it.
 // Data is passed down to the GoogleMap component as props.
@@ -17,6 +21,7 @@ const center = {
 };
 
 function MyComponent(props) {
+  const testImage = props.testImage;
 
   // This is the array of saved locations pulled from the database
   const savedLocations = props.savedLocations;
@@ -42,7 +47,7 @@ function MyComponent(props) {
     <div className="border mt-14 shadow-2xl rounded-full">
     <LoadScript
      // Add in your own Google Maps API key here
-      googleMapsApiKey="AIzaSyBRacG1Uw6S2XcqqqA50dnaTRUSwiJ2Gg4"
+        googleMapsApiKey={process.env.GOOGLE_MAPS_API_KEY}
     >
       <GoogleMap
         center={center}
@@ -65,6 +70,7 @@ function MyComponent(props) {
                 <p>{selected.street_address}</p>
                 <p>{selected.city}, {selected.state} {selected.zip_code}</p>
                 <p>"{selected.caption}" - Somebody</p>
+                <p><img class="w-60" src={testImage} alt="test" /></p>
               </p>
             </InfoWindow>
           )

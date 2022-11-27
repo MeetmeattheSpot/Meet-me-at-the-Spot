@@ -7,8 +7,5 @@ import App from './App';
 
 ReactDOM.render(
     <App />,
-    // <Login />,
-    // <Signup />,
-    // <Header />,
     document.getElementById('app'),
-);npm 
+);
