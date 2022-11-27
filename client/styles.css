@@ -29,11 +29,12 @@ body, html {
 #navbarText {
   display: inline;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  font-size: 45px;
+  font-size: 40px;
   font-weight: 600;
   color: black;
   letter-spacing: 7px;
 }
+
 #signupModal{
   position: absolute;
   padding: 0 1.5em 0 1.5em;
@@ -64,17 +65,6 @@ body, html {
   z-index: 100;
 }
 
-
-/* #sidebarContainer {
-  height: 80vh;
-  width: 100%;
-  background-color: white;
-  color: black;
-  text-align: center;
-  justify-content: center;
-  border-left: 3px solid black;
-  padding-top: 30px;
-} */
 #head {
   display: flex;
   justify-content: space-between;
@@ -92,22 +82,22 @@ body, html {
 	flex-direction: column;
 }
 
+#navWords{
+  display:flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+}
 .meet {
-  padding-left: 350px;
+  padding-left:350px;
   padding-right: 200px;
   color: white;
   font-family: 'Alkalami', serif;
-  font-size: 50px;
+  font-size: 2.5vw;
+  font-size:15px;
   align-items: center;
   text-align: center;
   padding-top: 20px;
 }
-
-/* .List-Map{
-	display: grid;
-	grid-template-columns: 1fr 4fr 1fr;
-	grid-column-gap: 0.5fr;
-} */
 
 #list{
   border: 1px solid yellow;
@@ -117,13 +107,11 @@ body, html {
 
 	border: 1px solid grainsboro;
   background-color: gold;
-  /* min-width: 250px; */
 	}
 
   #scrollContainer {
     overflow-y: scroll;
     max-height: 560px;
-
 
   }
   #scrollContainer2 {
@@ -140,10 +128,6 @@ body, html {
 	width: 95%;
 	height: 100px;
 }
-
-/* .mapdiv{
-margin-right: 100px;
-}  */
 
 form {
   padding-top: 45px;
@@ -175,14 +159,6 @@ button {
  
 }
 
-/* .inputContainer {
-  display: grid;
-  grid-template-columns: 100px auto;
-  grid-template-rows: auto auto auto auto auto;
-  font-family: sans-serif;
-  align-items: center;
-  justify-content: center;
-} */
 
 .inputContainer input {
   /* padding: 10px; */

@@ -34,7 +34,9 @@ const Navbar = props => {
           <div id="head" className="md:flex">
             <div className="flex gap-2">
             <img className="flex flex-col float-left w-20" src={logo} alt=""/>
-            <div className="meet">MEET ME AT THE SPOT</div>
+            <div id='navWords'>
+              <div className="meet">MEET ME AT THE SPOT</div>
+            </div>
             <div className="relative items-right ml-20">
             
               {!savedUser ? <button className="p-1 justify-right bg-[#FA7070] hover:bg-orange-300 text-white font-bold py-2 px-4 rounded" onClick={loginModal}>Log In</button>: null}

@@ -4,11 +4,13 @@ const path = require('path');
 const imageController = {};
 
 imageController.uploadImage = (req, res, next) => {
-  const { filename, mimetype, size } = req.file;
+  console.log('made it to uploadImage middleware');
+  console.log('req.file is: ', req.file);
+  const { name, mimetype, size } = req.file;
   // const { location_id } = req.body;
   const filepath = req.file.path;
   const text = 'INSERT INTO image_files(filename, filepath, mimetype, size) VALUES($1, $2, $3, $4);';
-  const params = [filename, filepath, mimetype, size];
+  const params = [name, filepath, mimetype, size];
     db.query(text, params, (err, res2) => {
       if (err) {
         next({
@@ -18,6 +20,7 @@ imageController.uploadImage = (req, res, next) => {
         });
       } else {
         res.locals.filename = filename;
+        console.log('successfully uploaded image to db');
         return next();
       }
     }

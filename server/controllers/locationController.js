@@ -6,12 +6,12 @@ const locationController = {};
 // use google maps api to get location data
 locationController.geoCode = (req, res, next) => {
   const { street_address, city, state } = req.body;
-  fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${street_address},+${city},+${state}&key=AIzaSyCFoPyNqG2llIbrRofZtn7hLdH4COjqTQ8`)
+  fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${street_address},+${city},+${state}&key=AIzaSyDQDbjEQhw7quWxt1veIwXv3BmpVzjknr4`)
 
     .then((data) => data.json())
     .then((data) => {
-      console.log('Made the fetch');
-      console.log('data : ', data);
+      // console.log('Made the fetch');
+      // console.log('data : ', data);
       const lat = data.results[0].geometry.location.lat;
       const lng = data.results[0].geometry.location.lng;
       const addy = data.results[0].formatted_address;
@@ -37,7 +37,7 @@ locationController.geoCode = (req, res, next) => {
 //this is the middleware method to add the new entry into the locations table and receive back the location _id
 //the location _id will then be passed on to be used so cave the entry in captions table with a reference to the location
 locationController.addLocation = (req, res, next) => {
-  console.log('hello, from ADD LOCATION');
+  // console.log('hello, from ADD LOCATION');
   const { name, caption, zip, category, created_by_id } = req.body;
     const location_public = req.body.public;
   const { street_address, city, state, lat, lng, formatted_address } = res.locals.newEntry;
@@ -52,7 +52,7 @@ locationController.addLocation = (req, res, next) => {
         message: { err: 'Unable to add a new location' },
       });
     } else {
-      console.log('entry made :', res2.rows[0]._id);
+      // console.log('entry made :', res2.rows[0]._id);
       //saves the _id of the entry just made to res.locals
       res.locals.newEntryID = res2.rows[0]._id;
       next();
@@ -63,7 +63,7 @@ locationController.addLocation = (req, res, next) => {
 
 // retrieve user-submitted locations
 locationController.getUserLocations = (req, res, next) => {
-  console.log(req.params.user);
+  // console.log(req.params.user);
   const username = req.params.user;
   const query = 'SELECT * FROM users WHERE username = $1';
 
@@ -76,8 +76,8 @@ locationController.getUserLocations = (req, res, next) => {
       } else {
         // if a file is returned next
         const { username, _id } = dbResponse.rows[0];
-        console.log(`retrieving locations for ${username}, ${_id}`);
-        console.log(_id);
+        // console.log(`retrieving locations for ${username}, ${_id}`);
+        // console.log(_id);
         res.locals.user_id = _id;
         return next();
       }})
@@ -143,7 +143,7 @@ locationController.getLocationsAndCaptions = (req, res, next) => {
     .then(data => {
       let newArr = entriesFormatter(data.rows);
       res.locals.bigList = newArr;
-      console.log(res.locals.bigList);
+      // console.log(res.locals.bigList);
       next();
     })
     .catch((err) => {

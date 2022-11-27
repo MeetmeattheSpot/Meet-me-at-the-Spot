@@ -10,7 +10,14 @@ const Sidebar = props => {
     return (
 
         <div className="">
-          <Input setUserLocations={setUserLocations} userId={props.userId} savedUser={savedUser} savedLocations={savedLocations} setSavedLocations={setSavedLocations} userData={props.userData} setAddress={props.setAddress}/>
+          <Input 
+          setUserLocations={setUserLocations} 
+          userId={props.userId} 
+          savedUser={savedUser} 
+          savedLocations={savedLocations} 
+          setSavedLocations={setSavedLocations} 
+          userData={props.userData} 
+          setAddress={props.setAddress}/>
         </div>
        
     )
