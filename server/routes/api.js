@@ -73,12 +73,11 @@ const imageUpload = multer({
     dest: 'images',
 });
 
-router.post('/images',
-  imageUpload.single('image'),
-  imageController.uploadImage,
-  (req, res) =>  
-  res.json({ success: true, filename: res.locals.filename })
-);
+router.get('/images/:id',
+  imageController.getImageFromLocation,
+  (req, res) => {
+  res.type(res.locals.mimetype).sendFile(res.locals.fullfilepath);
+});
 
 // router.get('/images/:filename',
 //   imageController.getImage,
@@ -86,11 +85,16 @@ router.post('/images',
 //   res.type(res.locals.mimetype).sendFile(res.locals.fullfilepath);
 // });
 
-router.get('/images/location',
-  imageController.getImageFromLocation,
-  (req, res) => {
-  res.type(res.locals.mimetype).sendFile(res.locals.fullfilepath);
-});
+router.post('/images',
+  imageUpload.single('image'),
+  imageController.uploadImage,
+  (req, res) =>  
+  res.json({ success: true, filename: res.locals.filename })
+);
+
+
+
+
 
 
     

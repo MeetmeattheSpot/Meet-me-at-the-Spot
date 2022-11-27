@@ -4,14 +4,15 @@ const path = require('path');
 const imageController = {};
 
 imageController.uploadImage = (req, res, next) => {
-  // console.log('made it to uploadImage middleware');
+  console.log('made it to uploadImage middleware');
   // console.log('req.file is: ', req.file);
-  // console.log('req.body is: ', req.body);
+  console.log('req.body is: ', req.body);
   const { filename, mimetype, size } = req.file;
   const { location_id, user_id } = req.body;
   const filepath = req.file.path;
   const text = 'INSERT INTO image_files(filename, filepath, mimetype, size, location_id, user_id) VALUES($1, $2, $3, $4, $5, $6);';
   const params = [filename, filepath, mimetype, size, location_id, user_id];
+  console.log('params is :', params);
     db.query(text, params, (err, res2) => {
       if (err) {
         next({
@@ -52,9 +53,9 @@ imageController.getImage = (req, res, next) => {
 }
 
 imageController.getImageFromLocation = (req, res, next) => {
-  const { location_id } = req.body;
+  const { id } = req.params;
   const query = 'SELECT * FROM image_files WHERE location_id = $1';
-  db.query(query, [location_id])
+  db.query(query, [id])
     .then(dbResponse => {
       if (dbResponse.rows[0] === undefined) {
         next({
@@ -67,6 +68,7 @@ imageController.getImageFromLocation = (req, res, next) => {
           // console.log(`the db response is dbResponse.rows[0].filepath: ${dbResponse.rows[0].filepath}`);
           res.locals.fullfilepath = path.join(dirname, dbResponse.rows[0].filepath);
           res.locals.mimetype = dbResponse.rows[0].mimetype;
+          console.log(dbResponse.rows[0].filepath);
           return next();
         }
       }

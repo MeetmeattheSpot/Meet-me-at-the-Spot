@@ -103,14 +103,15 @@ const Input = (props) => {
                 let formData = new FormData();
                 formData.append('image', file);
                 formData.append('user_id', userId);
-                formData.append('location_id', locations[locations.length - 1].id);
+                formData.append('location_id', locations[locations.length - 1]._id);
                 fetch('/api/images', {
                     method: 'POST',
                     body: formData
                 })
                     .then((res) => res.json())
                     .then((res) => {
-                        setTestImage(`api/images/${res.filename}`);
+                        // returns the image filename if you wanted to use it
+                        // setTestImage(`api/images/${res.filename}`);
                     })
                     .then(fetch)
                     .catch(err => console.log('could not upload image'))
